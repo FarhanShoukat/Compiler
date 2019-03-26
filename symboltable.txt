@@ -1,0 +1,8 @@
+numPrint
+a
+temp
+num
+length
+i
+j
+first

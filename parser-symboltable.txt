@@ -1,0 +1,9 @@
+Identifier	Type
+numPrint	FUN
+a	CHAR
+temp	INT
+num	INT
+length	INT
+i	INT
+j	INT
+first	INT
