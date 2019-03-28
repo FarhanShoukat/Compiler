@@ -1,26 +1,34 @@
-int numPrint(int num, int length)
-{
-	int i, j, first, temp;
-	char a;
-	a := 'x';
-	out "enter number";
-	i := length;
-	while (i> 0)
-	{
-		first:= 0;		#this line contains a comment
-		j :=1;
-		while (j < i)
-		{
-			out j;
-			j := j + 1;
-		}
-		# this is a comment
-		i:= i - 1;
-		##This is a
-		Multiline
-		Comment##
-	}
-	out "temp is ";
-	out temp;
-	ret i;
+## prints numbers between a and b
+   returns max of a and b ##
+int function(int a, int b) {
+    int i, j, max;
+    i := a + 1;
+    j := b;
+
+    out "Numbers between x and y:";
+    while(i < j) {      #prints numbers between i (a) and j (b)
+        out i;
+    }
+
+    if(a > b) {         #returns max of both
+        max := a;
+    }
+    else {
+        max := b;
+    }
+
+    ret max;
 }
+
+int x, y, m;
+
+out "x:";
+in x;
+
+out "y:";
+in y;
+
+m := function(x, y);
+
+out "max of x and y:";
+out m;
