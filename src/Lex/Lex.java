@@ -259,7 +259,7 @@ public class Lex {
             System.exit(0);
         }
         else {
-            tokens.add(new Token(TokenEnum.STR, code.substring(currentIndex + 1, index), currentIndex));
+            tokens.add(new Token(TokenEnum.STR, code.substring(currentIndex, index + 1), currentIndex));
             currentIndex = index + 1;
         }
     }
