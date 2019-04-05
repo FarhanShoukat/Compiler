@@ -10,9 +10,10 @@ class AssignmentOrFunctionCall {
         tabs(++level); writer.println("A");
 
         tabs(level + 1); writer.println(look);
+        String r111p = look.lexeme.toString();
         match();
 
-        R111();
+        R111(r111p);
 
         Token token = CharacterChecks.checkCharacter(';');
         tabs(level + 1); writer.println(token);
@@ -20,14 +21,14 @@ class AssignmentOrFunctionCall {
         level--;
     }
 
-    private static void R111() {
+    private static void R111(String p) {
         tabs(++level); writer.println("R'''");
 
         if(look != null && look.token_type.equals(TokenEnum.EQ)) {
             tabs(level + 1); writer.println(look);
             match();
 
-            A1();
+            A1(p);
         }
         else {
             Token token = CharacterChecks.checkCharacter('(');
@@ -42,7 +43,7 @@ class AssignmentOrFunctionCall {
         level--;
     }
 
-    private static void A1() {
+    private static void A1(String p) {
         tabs(++level); writer.println("A'");
 
         Token next;
@@ -60,7 +61,8 @@ class AssignmentOrFunctionCall {
             tabs(level + 1); writer.println(next);
         }
         else {
-            Expression.E();
+            Object en = Expression.E();
+            emit(p, "=", en.toString());
         }
 
         level--;

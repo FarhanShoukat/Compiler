@@ -10,9 +10,9 @@ class DeclarationInsideFunction {
 
         Identifier.Type type = (Identifier.Type) look.token_type;
 
-        DeclarationOutsideFunction.D1();
+        int size = DeclarationOutsideFunction.D1();
 
-        DeclarationOutsideFunction.O11(type);
+        DeclarationOutsideFunction.O11(type, size);
 
         level--;
     }

@@ -12,14 +12,14 @@ class DeclarationOutsideFunction {
 
         Identifier.Type type = (Identifier.Type) look.token_type;
 
-        D1();
+        int size = D1();
 
-        R11(type);
+        R11(type, size);
 
         level--;
     }
 
-    static void D1() {
+    static int D1() {
         tabs(++level); writer.println("D'");
 
         if(look == null || !(look.token_type instanceof Identifier.Type)) {
@@ -28,16 +28,36 @@ class DeclarationOutsideFunction {
         }
         Identifier.Type type = (Identifier.Type) look.token_type;
 
-        Parser.T();
+        int size = T();
 
         //identifier ID
-        Token token = CharacterChecks.checkIdentifier(type);
+        Token token = CharacterChecks.checkIdentifier(type, size);
         tabs(level + 1); writer.println(token);
 
         level--;
+
+        return size;
     }
 
-    private static void R11(Identifier.Type type) {
+    private static int T() {
+        tabs(++level); writer.println("T");
+
+        tabs(level + 1); writer.println(look);
+
+        int size = -1;
+        if(look.token_type.equals(Identifier.Type.INT))
+            size = 4;
+        else if(look.token_type.equals(Identifier.Type.CHAR))
+            size = 1;
+
+        match();
+
+        --level;
+
+        return size;
+    }
+
+    private static void R11(Identifier.Type type, int size) {
         tabs(++level); writer.println("R''");
 
         if(look != null && look.token_type.equals('(')) {
@@ -52,13 +72,13 @@ class DeclarationOutsideFunction {
             B();
         }
         else {
-            O11(type);
+            O11(type, size);
         }
 
         level--;
     }
 
-    static void O11(Identifier.Type type) {
+    static void O11(Identifier.Type type, int size) {
         tabs(++level); writer.println("O''");
 
         if(look != null && look.token_type.equals(',')) {
@@ -66,10 +86,10 @@ class DeclarationOutsideFunction {
 
             match();
 
-            Token token = CharacterChecks.checkIdentifier(type);
+            Token token = CharacterChecks.checkIdentifier(type, size);
             tabs(level + 1); writer.println(token);
 
-            O11(type);
+            O11(type, size);
         }
         else {
             Token token = CharacterChecks.checkCharacter(';');

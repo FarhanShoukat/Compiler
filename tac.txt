@@ -1,0 +1,20 @@
+t1 = a + 1
+i = t1
+j = b
+out "Numbers between x and y:"
+if i LT j goto 7
+goto 9
+out i
+goto 5
+if a GT b goto 11
+goto 13
+max = a
+goto 14
+max = b
+return max
+out "x:"
+in x
+out "y:"
+in y
+out "max of x and y:"
+out m

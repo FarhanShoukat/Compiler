@@ -11,10 +11,12 @@ class Return {
         tabs(level + 1); writer.println(look);
         match();
 
-        Expression.E();
+        Object en = Expression.E();
 
         Token token = CharacterChecks.checkCharacter(';');
         tabs(level + 1); writer.println(token);
+
+        emit("return", en.toString());
 
         level--;
     }

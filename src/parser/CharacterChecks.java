@@ -4,9 +4,7 @@ import classes.Identifier;
 import classes.Token;
 import classes.TokenEnum;
 
-import static parser.Parser.look;
-import static parser.Parser.identifiers;
-import static parser.Parser.match;
+import static parser.Parser.*;
 
 class CharacterChecks {
     static Token checkCharacter(char c) {
@@ -21,7 +19,7 @@ class CharacterChecks {
         return token;
     }
 
-    static Token checkIdentifier(Identifier.Type type) {
+    static Token checkIdentifier(Identifier.Type type, int size) {
         if(look == null || !look.token_type.equals(TokenEnum.ID))
             Errors.identifierMissing();
 
@@ -31,12 +29,15 @@ class CharacterChecks {
 //        if (identifier.type != null)
 //            Errors.identifierAlreadyDefined();
 
-        identifier.type = type;
-
         match();
 
         if (look.token_type.equals('('))
             identifier.type = Identifier.Type.FUN;
+        else {
+            identifier.type = type;
+            identifier.memoryPosition = nextFreeMemoryAddress;
+            nextFreeMemoryAddress += size;
+        }
 
         return token;
     }

@@ -24,11 +24,16 @@ class Out {
         tabs(++level); writer.println("R");
 
         if(look != null && look.token_type.equals(TokenEnum.STR)) {
+            String strLex = look.lexeme.toString();
             tabs(level + 1); writer.println(look);
             match();
+
+            emit("out", strLex);
         }
         else {
-            Expression.E();
+            Object en = Expression.E();
+
+            emit("out", en.toString());
         }
 
         level--;

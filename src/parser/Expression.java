@@ -1,98 +1,114 @@
 package parser;
 
-import classes.Identifier;
 import classes.Token;
 import classes.TokenEnum;
 
 import static parser.Parser.*;
 
 class Expression {
-    static void E() {
+    static Object E() {
         tabs(++level); writer.println("E");
 
-        T();
-
-        E1();
+        Object n = E1(T());
 
         level--;
+
+        return n;
     }
 
-    private static void E1() {
+    private static Object E1(Object p) {
         tabs(++level); writer.println("E'");
+
+        Object n;
 
         if(look != null) {
             if(look.token_type.equals('+') || look.token_type.equals('-')) {
                 tabs(level + 1); writer.println(look);
+                Token sign = look;
                 match();
 
-                T();
+                Object tn = T();
+                String e1p = newID();
 
-                E1();
+                emit(e1p, "=", p.toString(), sign.token_type.toString(), tn.toString());
+
+                n = E1(e1p);
             }
             else {
                 tabs(level + 1); writer.println("null");
+
+                n = p;
             }
         }
+        else n = p;
 
         level--;
+
+        return n;
     }
 
-    private static void T() {
+    private static Object T() {
         tabs(++level); writer.println("T");
 
-        F();
-
-        T1();
+        Object n = T1(F());
 
         level--;
+
+        return n;
     }
 
-    private static void T1() {
+    private static Object T1(Object p) {
         tabs(++level); writer.println("T'");
+
+        Object n;
 
         if(look != null) {
             if(look.token_type.equals('*') || look.token_type.equals('/')) {
                 tabs(level + 1); writer.println(look);
+                Token sign = look;
                 match();
 
-                F();
+                Object fn = F();
+                String t1p = newID();
+                emit(t1p, "=", p.toString(), sign.token_type.toString(), fn.toString());
 
-                T1();
+                n = T1(t1p);
             }
             else {
                 tabs(level + 1); writer.println("null");
+
+                n = p;
             }
         }
+        else n = p;
 
         level--;
+
+        return n;
     }
 
-    private static void F() {
+    private static Object F() {
         tabs(++level); writer.println("F");
+
+        Object n = null;
 
         if(look == null) Errors.expressionMissing();
 
         if(look.token_type.equals(TokenEnum.ID)) {
-//            Identifier.Type type = identifiers.get(look.lexeme.toString()).type;
-//            if(type == null)
-//                Errors.identifierNotDefined();
-//            else if(!(type.equals(Identifier.Type.CHAR) || type.equals(Identifier.Type.INT)))
-//                Errors.identifierNotDefined();
-
             tabs(level + 1); writer.println(look);
-
+            n = look.lexeme;
             match();
         }
         else if(look.token_type.equals(TokenEnum.NUM) || look.token_type.equals(TokenEnum.CL)) {
             tabs(level + 1); writer.println(look);
-
+            n = look.lexeme;
             match();
         }
         else if(look.token_type.equals('(')) {
             tabs(level + 1); writer.println(look);
             match();
 
-            E();
+            n = E();
 
             Token token = CharacterChecks.checkCharacter(')');
             tabs(level + 1); writer.println(token);
@@ -101,7 +117,7 @@ class Expression {
             tabs(level + 1); writer.println(look);
             match();
 
-            E();
+            n = E();
 
             Token token = CharacterChecks.checkCharacter(']');
             tabs(level + 1); writer.println(token);
@@ -111,5 +127,7 @@ class Expression {
         }
 
         level--;
+
+        return n;
     }
 }

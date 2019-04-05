@@ -6,4 +6,5 @@ public class Identifier {
     }
 
     public Type type;
+    public int memoryPosition;
 }

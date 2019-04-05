@@ -17,11 +17,14 @@ class In {
 //        else if(identifiers.get(look.lexeme.toString()).type == null)
 //            Errors.identifierNotDefined();
 
+        String idLex = look.lexeme.toString();
         tabs(level + 1); writer.println(look);
         match();
 
         Token token = CharacterChecks.checkCharacter(';');
         tabs(level + 1); writer.println(token);
+
+        emit("in", idLex);
 
         level--;
     }
