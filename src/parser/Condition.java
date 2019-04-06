@@ -24,7 +24,7 @@ class Condition {
         Token token = CharacterChecks.checkCharacter('(');
         tabs(level + 1); writer.println(token);
 
-        Object e1n = Expression.E();
+        String e1n = Expression.E();
 
         if(look == null || !look.token_type.equals(TokenEnum.RO)) Errors.relationalOperatorMissing();
 
@@ -32,13 +32,13 @@ class Condition {
         tabs(level + 1); writer.println(look);
         match();
 
-        Object e2n = Expression.E();
+        String e2n = Expression.E();
 
         token = CharacterChecks.checkCharacter(')');
         tabs(level + 1); writer.println(token);
 
         int c1t = n;
-        emit("if", e1n.toString(), map.get(roLex), e2n.toString(), "goto");
+        emit("if", e1n, map.get(roLex), e2n, "goto");
         int c1f = n;
         emit("goto");
 

@@ -1,3 +1,4 @@
+Identifier	Type
 a	INT
 b	INT
 max	INT

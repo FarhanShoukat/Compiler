@@ -31,9 +31,9 @@ class Out {
             emit("out", strLex);
         }
         else {
-            Object en = Expression.E();
+            String en = Expression.E();
 
-            emit("out", en.toString());
+            emit("out", en);
         }
 
         level--;

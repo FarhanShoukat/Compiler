@@ -33,6 +33,8 @@ public class Parser {
     private static int idsGenerated = 0;
     private static ArrayList<String> threeAddressCode = new ArrayList<>();
 
+    static HashMap<String, Identifier> translatorIdentifiers = new HashMap<>();
+
     static int nextFreeMemoryAddress = 0;
     static int n = 1;
 
@@ -52,13 +54,19 @@ public class Parser {
 
                 writer = new PrintWriter("parser-symboltable.txt");
                 PrintWriter writer1 = new PrintWriter("translator-symboltable.txt");
+                writer.println("Identifier\tType");
+                writer1.println("Identifier\tType\tRelative-Address");
                 for (String id : identifiers.keySet()) {
                     Identifier identifier = identifiers.get(id);
                     writer.println(String.format("%s\t%s", id, identifier.type));
                     if(!identifier.type.equals(Identifier.Type.FUN))
                         writer1.println(String.format("%s\t%s\t%s", id, identifier.type, identifier.memoryPosition));
-                    else
-                        writer1.println(String.format("%s\t%s\t%s\t%s", id, identifier.type, identifier.memoryPosition, ((Function) identifier).returnType));
+//                    else
+//                        writer1.println(String.format("%s\t%s\t%s\t%s", id, identifier.type, identifier.memoryPosition, ((Function) identifier).returnType));
+                }
+                for(String id : translatorIdentifiers.keySet()) {
+                    Identifier identifier = translatorIdentifiers.get(id);
+                    writer1.println(String.format("%s\t%s\t%s", id, identifier.type, identifier.memoryPosition));
                 }
                 writer.close();
                 writer1.close();
@@ -188,5 +196,18 @@ public class Parser {
         threeAddressCode.set(lineNo, threeAddressCode.get(lineNo) + " " + patch);
     }
 
-    static String newTemp() { return randomIdPlaceholder + ++idsGenerated; }
+    static String newTemp(Identifier.Type identifierType) {
+        String id = randomIdPlaceholder + ++idsGenerated;
+
+        Identifier identifier = new Identifier();
+        identifier.type = identifierType;
+        identifier.memoryPosition = nextFreeMemoryAddress;
+        if(identifierType == Identifier.Type.INT)
+            nextFreeMemoryAddress += 4;
+        else if(identifierType == Identifier.Type.CHAR)
+            nextFreeMemoryAddress += 1;
+        translatorIdentifiers.put(id, identifier);
+
+        return id;
+    }
 }
