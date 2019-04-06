@@ -2,11 +2,11 @@ t1 = a + 1
 i = t1
 j = b
 out "Numbers between x and y:"
-if i LT j goto 7
+if i < j goto 7
 goto 9
 out i
 goto 5
-if a GT b goto 11
+if a > b goto 11
 goto 13
 max = a
 goto 14
@@ -16,5 +16,9 @@ out "x:"
 in x
 out "y:"
 in y
+parm x
+parm y
+call function , 2 , t2
+m = t2
 out "max of x and y:"
 out m

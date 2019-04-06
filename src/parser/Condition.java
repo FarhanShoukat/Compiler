@@ -4,9 +4,20 @@ import classes.Token;
 import classes.TokenEnum;
 import javafx.util.Pair;
 
+import java.util.HashMap;
+
 import static parser.Parser.*;
 
 class Condition {
+    private static HashMap<TokenEnum, String> map = new HashMap<TokenEnum, String>() {{
+        put(TokenEnum.LT, "<");
+        put(TokenEnum.LE, "<=");
+        put(TokenEnum.GT, ">");
+        put(TokenEnum.GE, ">=");
+        put(TokenEnum.EQ, "==");
+        put(TokenEnum.NE, "!=");
+    }};
+
     static Pair<Integer, Integer> C1() {
         tabs(++level); writer.println("C'");
 
@@ -27,7 +38,7 @@ class Condition {
         tabs(level + 1); writer.println(token);
 
         int c1t = n;
-        emit("if", e1n.toString(), roLex.toString(), e2n.toString(), "goto");
+        emit("if", e1n.toString(), map.get(roLex), e2n.toString(), "goto");
         int c1f = n;
         emit("goto");
 

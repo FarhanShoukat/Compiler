@@ -1,5 +1,6 @@
 package parser;
 
+import classes.Function;
 import classes.Identifier;
 import classes.Token;
 import classes.TokenEnum;
@@ -31,8 +32,13 @@ class CharacterChecks {
 
         match();
 
-        if (look.token_type.equals('('))
+        if (look.token_type.equals('(')) {
+            identifier = new Function();
             identifier.type = Identifier.Type.FUN;
+            identifier.memoryPosition = n;
+            ((Function) identifier).returnType = type;
+            identifiers.put(token.lexeme.toString(), identifier);
+        }
         else {
             identifier.type = type;
             identifier.memoryPosition = nextFreeMemoryAddress;

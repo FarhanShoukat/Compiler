@@ -1,5 +1,6 @@
 package parser;
 
+import classes.Function;
 import classes.Identifier;
 import classes.Token;
 import classes.TokenEnum;
@@ -56,6 +57,8 @@ public class Parser {
                     writer.println(String.format("%s\t%s", id, identifier.type));
                     if(!identifier.type.equals(Identifier.Type.FUN))
                         writer1.println(String.format("%s\t%s\t%s", id, identifier.type, identifier.memoryPosition));
+                    else
+                        writer1.println(String.format("%s\t%s\t%s\t%s", id, identifier.type, identifier.memoryPosition, ((Function) identifier).returnType));
                 }
                 writer.close();
                 writer1.close();
@@ -185,5 +188,5 @@ public class Parser {
         threeAddressCode.set(lineNo, threeAddressCode.get(lineNo) + " " + patch);
     }
 
-    static String newID() { return randomIdPlaceholder + ++idsGenerated; }
+    static String newTemp() { return randomIdPlaceholder + ++idsGenerated; }
 }

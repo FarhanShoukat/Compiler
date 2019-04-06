@@ -1,6 +1,7 @@
 a	INT	0
 b	INT	4
 max	INT	16
+function	FUN	1	INT
 x	INT	20
 i	INT	8
 y	INT	24

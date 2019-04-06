@@ -28,7 +28,7 @@ class Expression {
                 match();
 
                 Object tn = T();
-                String e1p = newID();
+                String e1p = newTemp();
 
                 emit(e1p, "=", p.toString(), sign.token_type.toString(), tn.toString());
 
@@ -69,7 +69,7 @@ class Expression {
                 match();
 
                 Object fn = F();
-                String t1p = newID();
+                String t1p = newTemp();
                 emit(t1p, "=", p.toString(), sign.token_type.toString(), fn.toString());
 
                 n = T1(t1p);
