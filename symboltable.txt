@@ -1,9 +1,8 @@
+numPrint
 a
-b
-max
-function
-x
+temp
+num
+length
 i
-y
 j
-m
+first

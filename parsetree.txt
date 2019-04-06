@@ -3,20 +3,20 @@ S
 		D'
 			T
 				(INT,^)
-			(ID,function)
+			(ID,numPrint)
 		R''
 			((,^)
 			PRD
 				D'
 					T
 						(INT,^)
-					(ID,a)
+					(ID,num)
 				R'
 					(,,^)
 					D'
 						T
 							(INT,^)
-						(ID,b)
+						(ID,length)
 					R'
 						null
 			(),^)
@@ -33,41 +33,30 @@ S
 							(ID,j)
 							O''
 								(,,^)
-								(ID,max)
+								(ID,first)
 								O''
-									(;,^)
+									(,,^)
+									(ID,temp)
+									O''
+										(;,^)
 					S'
-						A
-							(ID,i)
-							R'''
-								(EQ,^)
-								A'
-									E
-										T
-											F
-												(ID,a)
-											T'
-												null
-										E'
-											(+,^)
-											T
-												F
-													(NUM,1)
-												T'
-													null
-											E'
-												null
-							(;,^)
+						D''
+							D'
+								T
+									(CHAR,^)
+								(ID,a)
+							O''
+								(;,^)
 						S'
 							A
-								(ID,j)
+								(ID,a)
 								R'''
 									(EQ,^)
 									A'
 										E
 											T
 												F
-													(ID,b)
+													(CL,'x')
 												T'
 													null
 											E'
@@ -77,217 +66,237 @@ S
 								O
 									(OUT,^)
 									R
-										(STR,"Numbers between x and y:")
+										(STR,"enter number")
 									(;,^)
 								S'
-									L
-										(WHILE,^)
-										C'
-											((,^)
-											E
-												T
-													F
-														(ID,i)
-													T'
-														null
-												E'
-													null
-											(RO,LT)
-											E
-												T
-													F
-														(ID,j)
-													T'
-														null
-												E'
-													null
-											(),^)
-										B
-											({,^)
-											S'
-												O
-													(OUT,^)
-													R
-														E
-															T
-																F
-																	(ID,i)
-																T'
-																	null
-															E'
-																null
-													(;,^)
-												S'
-													null
-											(},^)
+									D''
+										D'
+											T
+												(INT,^)
+											(ID,i)
+										O''
+											(;,^)
 									S'
-										C
-											(IF,^)
-											C'
-												((,^)
-												E
-													T
-														F
-															(ID,a)
-														T'
+										A
+											(ID,i)
+											R'''
+												(EQ,^)
+												A'
+													E
+														T
+															F
+																(ID,length)
+															T'
+																null
+														E'
 															null
-													E'
-														null
-												(RO,GT)
-												E
-													T
-														F
-															(ID,b)
-														T'
+											(;,^)
+										S'
+											L
+												(WHILE,^)
+												C'
+													((,^)
+													E
+														T
+															F
+																(ID,i)
+															T'
+																null
+														E'
 															null
-													E'
-														null
-												(),^)
-											B
-												({,^)
-												S'
-													A
-														(ID,max)
-														R'''
-															(EQ,^)
-															A'
-																E
-																	T
-																		F
-																			(ID,a)
-																		T'
-																			null
-																	E'
-																		null
-														(;,^)
-													S'
-														null
-												(},^)
-											O'
-												(ELSE,^)
+													(RO,GT)
+													E
+														T
+															F
+																(NUM,0)
+															T'
+																null
+														E'
+															null
+													(),^)
 												B
 													({,^)
 													S'
 														A
-															(ID,max)
+															(ID,first)
 															R'''
 																(EQ,^)
 																A'
 																	E
 																		T
 																			F
-																				(ID,b)
+																				(NUM,0)
 																			T'
 																				null
 																		E'
 																			null
 															(;,^)
 														S'
-															null
+															A
+																(ID,j)
+																R'''
+																	(EQ,^)
+																	A'
+																		E
+																			T
+																				F
+																					(NUM,1)
+																				T'
+																					null
+																			E'
+																				null
+																(;,^)
+															S'
+																L
+																	(WHILE,^)
+																	C'
+																		((,^)
+																		E
+																			T
+																				F
+																					(ID,j)
+																				T'
+																					null
+																			E'
+																				null
+																		(RO,EQ)
+																		E
+																			T
+																				F
+																					(ID,i)
+																				T'
+																					null
+																			E'
+																				null
+																		(),^)
+																	B
+																		({,^)
+																		S'
+																			O
+																				(OUT,^)
+																				R
+																					E
+																						T
+																							F
+																								(ID,j)
+																							T'
+																								null
+																						E'
+																							null
+																				(;,^)
+																			S'
+																				A
+																					(ID,j)
+																					R'''
+																						(EQ,^)
+																						A'
+																							E
+																								T
+																									F
+																										(ID,j)
+																									T'
+																										null
+																								E'
+																									(+,^)
+																									T
+																										F
+																											(NUM,1)
+																										T'
+																											null
+																									E'
+																										null
+																					(;,^)
+																				S'
+																					null
+																		(},^)
+																S'
+																	A
+																		(ID,i)
+																		R'''
+																			(EQ,^)
+																			A'
+																				E
+																					T
+																						F
+																							(ID,i)
+																						T'
+																							null
+																					E'
+																						(-,^)
+																						T
+																							F
+																								(NUM,1)
+																							T'
+																								null
+																						E'
+																							null
+																		(;,^)
+																	S'
+																		null
 													(},^)
-										S'
-											R
-												(RET,^)
-												E
-													T
-														F
-															(ID,max)
-														T'
-															null
-													E'
-														null
-												(;,^)
 											S'
-												null
+												O
+													(OUT,^)
+													R
+														(STR,"temp is ")
+													(;,^)
+												S'
+													O
+														(OUT,^)
+														R
+															E
+																T
+																	F
+																		(ID,temp)
+																	T'
+																		null
+																E'
+																	null
+														(;,^)
+													S'
+														R
+															(RET,^)
+															E
+																T
+																	F
+																		(ID,i)
+																	T'
+																		null
+																E'
+																	null
+															(;,^)
+														S'
+															null
 				(},^)
 	S
-		D
-			D'
-				T
-					(INT,^)
-				(ID,x)
-			R''
-				O''
-					(,,^)
-					(ID,y)
-					O''
-						(,,^)
-						(ID,m)
-						O''
-							(;,^)
-		S
-			O
-				(OUT,^)
-				R
-					(STR,"x:")
-				(;,^)
-			S
-				I
-					(IN,^)
-					(ID,x)
-					(;,^)
-				S
-					O
-						(OUT,^)
-						R
-							(STR,"y:")
-						(;,^)
-					S
-						I
-							(IN,^)
-							(ID,y)
-							(;,^)
-						S
-							A
-								(ID,m)
-								R'''
-									(EQ,^)
-									A'
-										(ID,function)
-										((,^)
-										PRS
-											PR
-												E
-													T
-														F
-															(ID,x)
-														T'
-															null
-													E'
-														null
-												PR'
-													(,,^)
-													PR
-														E
-															T
-																F
-																	(ID,y)
-																T'
-																	null
-															E'
-																null
-														PR'
-															null
-										(),^)
-								(;,^)
-							S
-								O
-									(OUT,^)
-									R
-										(STR,"max of x and y:")
-									(;,^)
-								S
-									O
-										(OUT,^)
-										R
-											E
-												T
-													F
-														(ID,m)
-													T'
-														null
-												E'
-													null
-										(;,^)
-									S
+		A
+			(ID,numPrint)
+			R'''
+				((,^)
+				PRS
+					PR
+						E
+							T
+								F
+									(NUM,10)
+								T'
+									null
+							E'
+								null
+						PR'
+							(,,^)
+							PR
+								E
+									T
+										F
+											(NUM,5)
+										T'
+											null
+									E'
 										null
+								PR'
+									null
+				(),^)
+			(;,^)
+		S
+			null

@@ -1,10 +1,9 @@
 Identifier	Type
-a	INT
-b	INT
-max	INT
-function	FUN
-x	INT
+numPrint	FUN
+a	CHAR
+temp	INT
+num	INT
+length	INT
 i	INT
-y	INT
 j	INT
-m	INT
+first	INT
