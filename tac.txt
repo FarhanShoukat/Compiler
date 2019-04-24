@@ -1,10 +1,2 @@
-a = 2
-b = 3
-t1 = a + b
-c = t1
-out c
-t2 = a + b
-out t2
-t3 = c + 5
-c = t3
-out c
+in a
+out a

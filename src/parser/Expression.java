@@ -1,12 +1,22 @@
 package parser;
 
 import classes.Identifier;
+import classes.Quadruple;
 import classes.Token;
 import classes.TokenEnum;
+
+import java.util.HashMap;
 
 import static parser.Parser.*;
 
 class Expression {
+    private static HashMap<Character, Integer> map = new HashMap<Character, Integer>() {{
+        put('+', Quadruple.OPCODE_ADD);
+        put('-', Quadruple.OPCODE_SUB);
+        put('*', Quadruple.OPCODE_MUL);
+        put('/', Quadruple.OPCODE_DIV);
+    }};
+
     static String E() {
         tabs(++level); writer.println("E");
 
@@ -32,6 +42,7 @@ class Expression {
                 String e1p = newTemp(getType(p, tn));
 
                 emit(e1p, "=", p, sign.token_type.toString(), tn);
+                quadruples.add(new Quadruple(map.get(sign.token_type), getPair(p), getPair(tn), getPair(e1p)));
 
                 n = E1(e1p);
             }
@@ -72,6 +83,7 @@ class Expression {
                 String fn = F();
                 String t1p = newTemp(getType(p, fn));
                 emit(t1p, "=", p, sign.token_type.toString(), fn);
+                quadruples.add(new Quadruple(map.get(sign.token_type), getPair(p), getPair(fn), getPair(t1p)));
 
                 n = T1(t1p);
             }

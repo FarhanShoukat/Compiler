@@ -1,5 +1,6 @@
 package parser;
 
+import classes.Quadruple;
 import classes.Token;
 import classes.TokenEnum;
 
@@ -25,6 +26,7 @@ class In {
         tabs(level + 1); writer.println(token);
 
         emit("in", idLex);
+        quadruples.add(new Quadruple(Quadruple.OPCODE_IN, getPair(idLex)));
 
         level--;
     }

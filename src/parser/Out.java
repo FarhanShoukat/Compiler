@@ -1,5 +1,6 @@
 package parser;
 
+import classes.Quadruple;
 import classes.Token;
 import classes.TokenEnum;
 
@@ -29,11 +30,13 @@ class Out {
             match();
 
             emit("out", strLex);
+            quadruples.add(new Quadruple(Quadruple.OPCODE_OUT, new Quadruple.Pair(Quadruple.Pair.TYPE_STR, strLex.substring(1, strLex.length() - 1))));
         }
         else {
             String en = Expression.E();
 
             emit("out", en);
+            quadruples.add(new Quadruple(Quadruple.OPCODE_OUT, getPair(en)));
         }
 
         level--;

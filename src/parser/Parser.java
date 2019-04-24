@@ -1,9 +1,7 @@
 package parser;
 
-import classes.Function;
-import classes.Identifier;
-import classes.Token;
-import classes.TokenEnum;
+import classes.*;
+import vm.VM;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,6 +27,7 @@ public class Parser {
     static int level = -1;
     static PrintWriter writer = null;
 
+
     private static String randomIdPlaceholder = "t";
     private static int idsGenerated = 0;
     private static ArrayList<String> threeAddressCode = new ArrayList<>();
@@ -37,6 +36,10 @@ public class Parser {
 
     static int nextFreeMemoryAddress = 0;
     static int n = 1;
+
+
+    static ArrayList<Quadruple> quadruples = new ArrayList<>();
+
 
     public static void Parse(ArrayList<Token> tokens, HashMap<String, Identifier> identifiers, String code) {
         Parser.tokens = tokens;
@@ -74,9 +77,17 @@ public class Parser {
                 Path path = Paths.get("tac.txt");
                 Files.write(path, threeAddressCode, Charset.defaultCharset());
 
+                writer = new PrintWriter("mc.txt");
+                for(Quadruple quadruple : quadruples)
+                    writer.println(quadruple);
+                writer.close();
 
-                System.out.println("Parse tree created successfully!");
-                System.out.println("Three address code create successfully!");
+
+//                System.out.println("Parse tree created successfully!");
+//                System.out.println("Three address code create successfully!");
+//                System.out.println("Machine Code create successfully!");
+
+                VM.vm(quadruples);
             }
             catch(IOException e) {
                 System.out.println(e.getMessage());
@@ -209,5 +220,16 @@ public class Parser {
         translatorIdentifiers.put(id, identifier);
 
         return id;
+    }
+
+    static Quadruple.Pair getPair(String str) {
+        if(identifiers.containsKey(str) || translatorIdentifiers.containsKey(str)) {
+            Identifier identifier = identifiers.getOrDefault(str, translatorIdentifiers.get(str));
+            return new Quadruple.Pair(identifier.type == Identifier.Type.INT ? Quadruple.Pair.TYPE_ADDR_INT : Quadruple.Pair.TYPE_ADDR_CL, identifier.memoryPosition);
+        }
+        else if(str.charAt(0) == '\'')
+            return new Quadruple.Pair(Quadruple.Pair.TYPE_CL, (int) str.charAt(1));
+        else
+            return new Quadruple.Pair(Quadruple.Pair.TYPE_INT, str);
     }
 }

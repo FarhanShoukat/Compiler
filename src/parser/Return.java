@@ -1,5 +1,6 @@
 package parser;
 
+import classes.Quadruple;
 import classes.Token;
 
 import static parser.Parser.*;
@@ -17,6 +18,7 @@ class Return {
         tabs(level + 1); writer.println(token);
 
         emit("return", en);
+        quadruples.add(new Quadruple(Quadruple.OPCODE_RET, getPair(en)));
 
         level--;
     }

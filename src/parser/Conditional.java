@@ -1,5 +1,6 @@
 package parser;
 
+import classes.Quadruple;
 import classes.TokenEnum;
 import javafx.util.Pair;
 
@@ -16,6 +17,7 @@ class Conditional {
         int c1t = pair.getKey();
         int c1f = pair.getValue();
         backPatch(c1t, Integer.toString(n));
+        quadruples.get(c1t - 1).o3 = Integer.toString(n);
 
         B();
 
@@ -33,16 +35,21 @@ class Conditional {
 
             int next = n;
             emit("goto");
+            quadruples.add(new Quadruple(Quadruple.OPCODE_GOTO));
+
             backPatch(f, Integer.toString(n));
+            quadruples.get(f - 1).o1 = Integer.toString(n);
 
             B();
 
             backPatch(next, Integer.toString(n));
+            quadruples.get(next - 1).o1 = Integer.toString(n);
         }
         else {
             tabs(level + 1); writer.println("null");
 
             backPatch(f, Integer.toString(n));
+            quadruples.get(f - 1).o1 = Integer.toString(n);
         }
 
         level--;

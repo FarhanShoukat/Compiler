@@ -2,136 +2,31 @@ S
 	D
 		D'
 			T
-				(INT,^)
+				(CHAR,^)
 			(ID,a)
 		R''
 			O''
 				(,,^)
 				(ID,b)
 				O''
-					(,,^)
-					(ID,c)
-					O''
-						(;,^)
+					(;,^)
 	S
-		A
+		I
+			(IN,^)
 			(ID,a)
-			R'''
-				(EQ,^)
-				A'
+			(;,^)
+		S
+			O
+				(OUT,^)
+				R
 					E
 						T
 							F
-								(NUM,2)
+								(ID,a)
 							T'
 								null
 						E'
 							null
-			(;,^)
-		S
-			A
-				(ID,b)
-				R'''
-					(EQ,^)
-					A'
-						E
-							T
-								F
-									(NUM,3)
-								T'
-									null
-							E'
-								null
 				(;,^)
 			S
-				A
-					(ID,c)
-					R'''
-						(EQ,^)
-						A'
-							E
-								T
-									F
-										(ID,a)
-									T'
-										null
-								E'
-									(+,^)
-									T
-										F
-											(ID,b)
-										T'
-											null
-									E'
-										null
-					(;,^)
-				S
-					O
-						(OUT,^)
-						R
-							E
-								T
-									F
-										(ID,c)
-									T'
-										null
-								E'
-									null
-						(;,^)
-					S
-						O
-							(OUT,^)
-							R
-								E
-									T
-										F
-											(ID,a)
-										T'
-											null
-									E'
-										(+,^)
-										T
-											F
-												(ID,b)
-											T'
-												null
-										E'
-											null
-							(;,^)
-						S
-							A
-								(ID,c)
-								R'''
-									(EQ,^)
-									A'
-										E
-											T
-												F
-													(ID,c)
-												T'
-													null
-											E'
-												(+,^)
-												T
-													F
-														(NUM,5)
-													T'
-														null
-												E'
-													null
-								(;,^)
-							S
-								O
-									(OUT,^)
-									R
-										E
-											T
-												F
-													(ID,c)
-												T'
-													null
-											E'
-												null
-									(;,^)
-								S
-									null
+				null

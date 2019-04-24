@@ -1,6 +1,7 @@
 package parser;
 
 import classes.Function;
+import classes.Quadruple;
 import classes.Token;
 import classes.TokenEnum;
 
@@ -31,6 +32,7 @@ class AssignmentOrFunctionCall {
 
             String a1n = A1();
             emit(p, "=", a1n);
+            quadruples.add(new Quadruple(Quadruple.OPCODE_ASSIGN, getPair(p), getPair(a1n)));
         }
         else {
             Token token = CharacterChecks.checkCharacter('(');
@@ -43,6 +45,8 @@ class AssignmentOrFunctionCall {
 
             String temp = newTemp(((Function)identifiers.get(p)).returnType);
             emit("call", p, ",", Integer.toString(prsc), ",", temp);
+
+            quadruples.add(new Quadruple(Quadruple.OPCODE_CALL, identifiers.get(p).memoryPosition, Integer.toString(prsc), translatorIdentifiers.get(temp).memoryPosition));
         }
 
         level--;
@@ -70,6 +74,7 @@ class AssignmentOrFunctionCall {
 
             n = newTemp(((Function)identifiers.get(id.lexeme.toString())).returnType);
             emit("call", id.lexeme.toString(), ",", Integer.toString(prsc), ",", n);
+            quadruples.add(new Quadruple(Quadruple.OPCODE_CALL, identifiers.get(id.lexeme.toString()).memoryPosition, Integer.toString(prsc), translatorIdentifiers.get(n).memoryPosition));
         }
         else {
             String en = Expression.E();
@@ -105,6 +110,8 @@ class AssignmentOrFunctionCall {
 
         String en = Expression.E();
         emit("parm", en);
+
+        quadruples.add(new Quadruple(Quadruple.OPCODE_PARM, getPair(en)));
 
         int c = PR1() + 1;
 

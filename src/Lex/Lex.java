@@ -352,7 +352,7 @@ public class Lex {
             }
             writer.close();
 
-            System.out.println("Tokens created successfully!");
+            //System.out.println("Tokens created successfully!");
 
             Parser.Parse(tokens, identifiers, code);
         }

@@ -1,5 +1,6 @@
 package parser;
 
+import classes.Quadruple;
 import classes.Token;
 import classes.TokenEnum;
 import javafx.util.Pair;
@@ -16,6 +17,15 @@ class Condition {
         put(TokenEnum.GE, ">=");
         put(TokenEnum.EQ, "==");
         put(TokenEnum.NE, "!=");
+    }};
+
+    private static HashMap<TokenEnum, Integer> map1 = new HashMap<TokenEnum, Integer>() {{
+        put(TokenEnum.LT, Quadruple.OPCODE_LT);
+        put(TokenEnum.LE, Quadruple.OPCODE_LE);
+        put(TokenEnum.GT, Quadruple.OPCODE_GT);
+        put(TokenEnum.GE, Quadruple.OPCODE_GE);
+        put(TokenEnum.EQ, Quadruple.OPCODE_EQ);
+        put(TokenEnum.NE, Quadruple.OPCODE_NE);
     }};
 
     static Pair<Integer, Integer> C1() {
@@ -39,8 +49,11 @@ class Condition {
 
         int c1t = n;
         emit("if", e1n, map.get(roLex), e2n, "goto");
+        quadruples.add(new Quadruple(map1.get(roLex), getPair(e1n), getPair(e2n)));
+
         int c1f = n;
         emit("goto");
+        quadruples.add(new Quadruple(Quadruple.OPCODE_GOTO));
 
         level--;
 
