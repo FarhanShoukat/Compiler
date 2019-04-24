@@ -1,11 +1,7 @@
 Identifier	Type	Relative-Address
-a	CHAR	24
-temp	INT	20
-num	INT	0
-length	INT	4
-i	INT	25
-j	INT	12
-first	INT	16
-t1	INT	29
-t2	INT	33
-t3	INT	37
+a	INT	0
+b	INT	4
+c	INT	8
+t1	INT	12
+t2	INT	16
+t3	INT	20
