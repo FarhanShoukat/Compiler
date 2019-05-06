@@ -2,7 +2,6 @@ package parser;
 
 import classes.Quadruple;
 import classes.TokenEnum;
-import javafx.util.Pair;
 
 import static parser.Parser.*;
 
@@ -13,7 +12,7 @@ class Conditional {
         tabs(level + 1); writer.println(look);
         match();
 
-        Pair<Integer, Integer> pair = Condition.C1();
+        Pair pair = Condition.C1();
         int c1t = pair.getKey();
         int c1f = pair.getValue();
         backPatch(c1t, Integer.toString(n));

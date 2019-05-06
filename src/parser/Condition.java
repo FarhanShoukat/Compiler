@@ -3,7 +3,6 @@ package parser;
 import classes.Quadruple;
 import classes.Token;
 import classes.TokenEnum;
-import javafx.util.Pair;
 
 import java.util.HashMap;
 
@@ -28,7 +27,7 @@ class Condition {
         put(TokenEnum.NE, Quadruple.OPCODE_NE);
     }};
 
-    static Pair<Integer, Integer> C1() {
+    static Pair C1() {
         tabs(++level); writer.println("C'");
 
         Token token = CharacterChecks.checkCharacter('(');
@@ -57,6 +56,6 @@ class Condition {
 
         level--;
 
-        return new Pair<>(c1t, c1f);
+        return new Pair(c1t, c1f);
     }
 }
