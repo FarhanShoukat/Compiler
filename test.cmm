@@ -1,3 +1,47 @@
-char a, b;
+int a, b, c, d;
+
+out "a:";
 in a;
-out a;
+out "b:";
+in b;
+out "c:";
+in c;
+out "d:";
+in d;
+
+out "a + b - c * d:";
+out a + b - c * d;
+
+if(a < b) {
+    if(a < c) {
+        out "Min(a, b, c):a";
+    }
+    else {
+        out "Min(a, b, c):c";
+    }
+}
+else {
+    if(b < c) {
+        out "Min(a, b, c):b";
+    }
+    else {
+        out "Min(a, b, c):c";
+    }
+}
+
+char e, f;
+out "e:";
+in e;
+out "f:";
+in f;
+
+if(e < f) {
+    out "characters between e and f:";
+    while(e <= f) {
+        out e;
+        e := e + 1;
+    }
+}
+else {
+    out "e should be less than f";
+}

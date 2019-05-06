@@ -1,3 +1,7 @@
 Identifier	Type
-a	CHAR
-b	CHAR
+a	INT
+b	INT
+c	INT
+d	INT
+e	CHAR
+f	CHAR

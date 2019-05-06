@@ -1,2 +1,41 @@
+out "a:"
 in a
-out a
+out "b:"
+in b
+out "c:"
+in c
+out "d:"
+in d
+out "a + b - c * d:"
+t1 = a + b
+t2 = c * d
+t3 = t1 - t2
+out t3
+if a < b goto 16
+goto 22
+if a < c goto 18
+goto 20
+out "Min(a, b, c):a"
+goto 21
+out "Min(a, b, c):c"
+goto 27
+if b < c goto 24
+goto 26
+out "Min(a, b, c):b"
+goto 27
+out "Min(a, b, c):c"
+out "e:"
+in e
+out "f:"
+in f
+if e < f goto 33
+goto 41
+out "characters between e and f:"
+if e <= f goto 36
+goto 40
+out e
+t4 = e + 1
+e = t4
+goto 34
+goto 42
+out "e should be less than f"
